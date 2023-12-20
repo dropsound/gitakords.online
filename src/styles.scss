@@ -1,9 +1,15 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import '../src/assets/scss/helpers.scss';
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;600;800;900&display=swap');
+@import '../src/assets/scss/helpers';
+
+@import '../src/assets/scss/variables';
+@import '../src/assets/scss/theme-bootstrap';
+@import '../src/assets/scss/components';
+
+@import '../src/assets/scss/general';
 
 :root {
-  --primary-color: #026467;
+  --primary-color: #2a2e34;
   --secondary-color: #e5f5ea;
   --body-text-color: #596392;
   --navbar-footer-color: #f9f9f9;
@@ -11,22 +17,23 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Kanit', sans-serif;
   font-size: 16px;
-  color: var(--body-text-color);
+  color: $grey;
 }
 
 .layout {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1rem;
 }
 
 .container{
   max-width: 1140px;
   margin-inline: auto;
 }
+
+
 
 .site-logo {
   padding: 5px 20px;
@@ -42,7 +49,8 @@ body {
 }
 
 .featured-section {
-  background-color: var(--primary-color);
+  background-color: $yellow-dark;
+
 }
 
 .comment-box {
