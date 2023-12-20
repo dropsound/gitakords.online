@@ -1,21 +1,44 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Song } from '../models/song.model'; // Define Song model interface if needed
+import { Song } from '../models/song.model';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SongService {
-  private apiUrl = 'https://your-api-url'; // Replace with your API endpoint
 
+  getYourData(): Observable<any[]> {
+    return this.firestore.collection('song').valueChanges();
+  }
 
-  constructor(private http: HttpClient) { }
+  getSong(id: string): Observable<Song | undefined> {
+    const songDocument: AngularFirestoreDocument<Song> = this.firestore.doc<Song>(`song/${id}`);
+    return songDocument.valueChanges();
+  }
+  private songsCollection: AngularFirestoreCollection<Song>;
 
-  getSongDetails(songId: string): Observable<Song> {
-    const url = `${this.apiUrl}/songs/${songId}`; // API endpoint for fetching a specific song
+  constructor(private firestore: AngularFirestore) {
+    this.songsCollection = this.firestore.collection<Song>('song');
+  }
 
-    return this.http.get<Song>(url);
+  getSongs(): Observable<Song[]> {
+    return this.songsCollection.valueChanges();
+  }
+
+  addSong(song: Song): Promise<any> {
+    return this.songsCollection.add(song);
+  }
+
+  updateSong(songId: string, updatedSong: Partial<Song>): Promise<void> {
+    return this.songsCollection.doc(songId).update(updatedSong);
+  }
+
+  deleteSong(songId: string): Promise<void> {
+    return this.songsCollection.doc(songId).delete();
   }
 }
+
+

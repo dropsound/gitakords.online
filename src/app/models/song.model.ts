@@ -1,10 +1,9 @@
 export interface Song {
-  songId: number;
+  songId?: number;
   title: string;
   artist: string;
-  album?: string; // Optional property
+  album?: string;
   lyrics: string;
   chords: string;
   yearReleased?: number;
-  // Add other properties as needed
 }

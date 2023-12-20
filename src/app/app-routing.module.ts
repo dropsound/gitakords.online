@@ -12,11 +12,12 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'category', component: SingleCategoryComponent },
   { path: 'post', component: SinglePostComponent },
-  { path: 'song', component: SongComponent },
 
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
-  { path: 'terms-conditions', component: TermsAndConditionsComponent}
+  { path: 'terms-conditions', component: TermsAndConditionsComponent},
+
+  { path: 'songs/:id', component: SongComponent }
 ];
 
 @NgModule({
