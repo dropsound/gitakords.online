@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { SongService } from 'src/app/services/song.service';
 import { Song } from 'src/app/models/song.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-song',
@@ -13,8 +14,11 @@ import { Song } from 'src/app/models/song.model';
   styleUrl: './song.component.scss'
 })
 export class SongComponent implements OnInit {
-  songId: any;
-  songDetails: Song | undefined;
+  song$: Observable<Song | undefined> | undefined;
+  songId: string = '1';
+  title: string = 'Nije svejedno';
+
+  song: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -22,15 +26,16 @@ export class SongComponent implements OnInit {
     ) {
 
   }
-
-
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.songId = params['songId'];
+    this.songId = this.route.snapshot.paramMap.get('id') || ''; // Get the song ID from route parameters
+    this.song$ = this.songService.getSong(this.title);
 
-      this.songService.getSongDetails(this.songId).subscribe(data => {
-        this.songDetails = data;
-      });
+
+    this.songService.getYourData().subscribe(data => {
+
+      this.song = data;
+      console.log(data);
     });
   }
+
 }

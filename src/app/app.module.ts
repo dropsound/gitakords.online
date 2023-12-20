@@ -23,6 +23,14 @@ import { CommentListComponent } from './comments/comment-list/comment-list.compo
 
 import { PostCardComponent } from './layouts/post-card/post-card.component';
 
+import { SongComponent } from './layouts/song/song.component';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -44,7 +52,12 @@ import { PostCardComponent } from './layouts/post-card/post-card.component';
     SubscriptionFormComponent,
     CommentFormComponent,
     CommentListComponent,
-    PostCardComponent
+    PostCardComponent,
+    SongComponent,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
 
   providers: [],
